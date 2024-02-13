@@ -1,0 +1,8 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/DotNet6WebApi/.vs
+/DotNet6WebApi/Readxml/obj
+/WebApi/.vs/WebApi
+/WebApi/WebApi/obj
