@@ -2,13 +2,16 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using SnackboxAPI;
 using Swashbuckle.AspNetCore.Filters;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddDbContext<ApplicationdbContext>(opt =>
+                            opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
+    sqlServerOptions => sqlServerOptions.EnableRetryOnFailure()));
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -23,13 +26,17 @@ builder.Services.AddSwaggerGen(options =>
 	});
 	options.OperationFilter<SecurityRequirementsOperationFilter>();
 });
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<MnaveenDbContext>(options => options.UseSqlServer(connectionString));
-builder.Services.AddCors(c =>
+builder.Services.AddCors(options =>
 {
-	c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+    options.AddPolicy("AllowOrigin",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
 });
-builder.Services.AddSwaggerGen();
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 	.AddJwtBearer(option =>
 	{
@@ -41,19 +48,18 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 			ValidateAudience = false
 		};
 	});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-	app.UseSwagger();
-	app.UseSwaggerUI();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
-
 app.UseCors("AllowOrigin");
-
+app.UseHttpsRedirection();
 app.UseAuthentication();
 
 app.UseAuthorization();
