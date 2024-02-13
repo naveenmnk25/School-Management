@@ -1,44 +1,50 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import React, { useState, useEffect, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { BrowserRouter as Router, Link } from "react-router-dom";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
-import AddPost from "./components/AddPost";
-import Post from "./components/Post";
-import PostsList from "./components/PostsList";
 
-function App() {
+import { logout } from "./slices/auth";
+
+import EventBus from "./common/EventBus";
+import Routers from "./Route/Route";
+
+const App = () => {
+  const [showModeratorBoard, setShowModeratorBoard] = useState(false);
+  const [showAdminBoard, setShowAdminBoard] = useState(false);
+
+  const { user: currentUser } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  const logOut = useCallback(() => {
+    dispatch(logout());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (currentUser) {
+      //setShowModeratorBoard(currentUser.roles.includes("ROLE_MODERATOR"));
+     // setShowAdminBoard(currentUser.roles.includes("ROLE_ADMIN"));
+    } else {
+      setShowModeratorBoard(false);
+      setShowAdminBoard(false);
+    }
+
+    EventBus.on("logout", () => {
+      logOut();
+    });
+
+    return () => {
+      EventBus.remove("logout");
+    };
+  }, [currentUser, logOut]);
+
   return (
     <Router>
-      <nav className="navbar navbar-expand navbar-dark bg-dark">
-        <div className="container">
-        <a href="/" className="navbar-brand">
-          REACT REDUX CRUD
-        </a>
-        <div className="navbar-nav mr-auto">
-          <li className="nav-item">
-            <Link to={"/"} className="nav-link">
-              Posts
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to={"/add"} className="nav-link">
-              Add
-            </Link>
-          </li>
-        </div>
-        </div>
-      </nav>
-
-      <div className="container mt-3">
-        <Routes>
-          <Route exact path="/" element={<PostsList/>} />
-          <Route exact path="/add" element={<AddPost/>} />
-          <Route path="/posts/:id" element={<Post/>} />
-        </Routes>
-      </div>
+          <Routers/>
     </Router>
   );
-}
+};
 
 export default App;
