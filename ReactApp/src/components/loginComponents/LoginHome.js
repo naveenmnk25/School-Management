@@ -17,12 +17,12 @@ const LoginHomePage = () => {
             <Link to={PathConstants.SMLOGIN} className="nav-link">
                   LOGIN
                 </Link>
-   <Link to={PathConstants.SMREGISTRATION} className="nav-link">
-                  REGISTRATION
-                </Link>
-<Link to={PathConstants.SMADMISSION} className="nav-link">
-                  ADMISSION
-                </Link>
+            <Link to={PathConstants.SMREGISTRATION} className="nav-link">
+                            REGISTRATION
+                          </Link>
+            <Link to={PathConstants.SMADMISSION} className="nav-link">
+                              ADMISSION
+                            </Link>
           </div>
           <div className="col-6">
             <Outlet />
