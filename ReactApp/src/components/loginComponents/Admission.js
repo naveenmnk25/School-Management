@@ -5,7 +5,7 @@ const AdmissionPage = () => {
   
   return (
    <>
-   Admission
+   ad
    </>
   );
 };

@@ -5,7 +5,7 @@ const RegistrationPage = () => {
   
   return (
    <>
-   Registration
+   rr
    </>
   );
 };

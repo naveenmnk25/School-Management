@@ -1,6 +1,10 @@
 import React, {   } from "react";
 import { PathConstants } from "../../Route/path-constants";
-import { Link, Outlet } from "react-router-dom";
+import {
+  NavLink,
+  Outlet
+} from "react-router-dom";
+import "./Login.css";
 
 
 const LoginHomePage = () => {
@@ -8,23 +12,29 @@ const LoginHomePage = () => {
   return (
    <>
    <div className="container">
-    <div className="row card p-5">
+    <div className="row h100vh">
       <div className="col-12">
       </div>
       <div className="col-12">
-         <div className="row">
-          <div className="col-6">
-            <Link to={PathConstants.SMLOGIN} className="nav-link">
-                  LOGIN
-                </Link>
-            <Link to={PathConstants.SMREGISTRATION} className="nav-link">
-                            REGISTRATION
-                          </Link>
-            <Link to={PathConstants.SMADMISSION} className="nav-link">
-                              ADMISSION
-                            </Link>
+         < div className = "row LCard nav-css" >
+          <div className="col-4 nav-css">
+            <div className="linkcss"> 
+            < span>
+             < NavLink to = { PathConstants.SMLOGIN} className = "nav-link"activeClassName = "active-link" >
+               LOGIN 
+               </NavLink></span>
+               < span >
+               < NavLink to = {PathConstants.SMREGISTRATION} className = "nav-link" activeClassName = "active-link" >
+                 rr 
+                 </NavLink> 
+                 </span>
+                 < span >
+                 <NavLink to = {PathConstants.SMADMISSION} className = "nav-link"activeClassName = "active-link" >
+                 ad </NavLink>
+                 </span>
+            </div> 
           </div>
-          <div className="col-6">
+          <div className="col-6 render-css">
             <Outlet />
           </div>
          </div>
