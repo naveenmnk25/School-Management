@@ -15,23 +15,23 @@ a.nav-link.active{
    animation-name: example;
     animation-duration: 4s;
     background-color: rgb(0, 183, 255);
-    color: black; 
+    color: black;
 }
 a.nav-link:hover{
     font-weight:bold ;
     width: 320px;
     background-color: rgb(255, 166, 0);
-    color: white; 
-    
+    color: white;
+
 }
 @keyframes example {
   from {
     background-color: rgb(255, 166, 0);
-    color: white; 
+    color: white;
 }
   to {
     background-color: rgb(0, 183, 255);
-    color: black; 
+    color: black;
 }
 }
 .h100vh{
@@ -61,4 +61,135 @@ a.nav-link:hover{
     padding: 1px;
     border-radius: 21px;
     display: block;
+}
+
+.login-form{
+    .singup {
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        display: block;
+        font-weight: bold;
+        font-size: x-large;
+        margin-top: 1.5em;
+      }
+
+      .card {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 350px;
+        /* width: 300px; */
+        flex-direction: column;
+        gap: 35px;
+        border-radius: 15px;
+        background:none !important;
+        /* box-shadow: 16px 16px 32px #c8c8c8,
+              -16px -16px 32px #fefefe; */
+        border-radius: 8px;
+        box-shadow:none !important;
+        border: none;
+      }
+
+      .inputBox,
+      .inputBox1 {
+        position: relative;
+        width: 250px;
+      }
+
+      .inputBox input,
+      .inputBox1 input {
+        width: 100%;
+        padding: 10px;
+        outline: none;
+        border: none;
+        color: #fff;
+        font-size: 1em;
+        background: transparent;
+        border-left: 2px solid #fff;
+        border-bottom: 2px solid #fff;
+        transition: 0.1s;
+        border-bottom-left-radius: 8px;
+      }
+
+      .inputBox span,
+      .inputBox1 span {
+        margin-top: 5px;
+        position: absolute;
+        left: 0;
+        transform: translateY(-4px);
+        margin-left: 10px;
+        padding: 10px;
+        pointer-events: none;
+        font-size: 12px;
+        color: #fff;
+        text-transform: uppercase;
+        transition: 0.5s;
+        letter-spacing: 3px;
+        border-radius: 8px;
+      }
+
+      .inputBox input:valid~span,
+      .inputBox input:focus~span {
+        transform: translateX(113px) translateY(-15px);
+        font-size: 0.8em;
+        padding: 5px 10px;
+        background: #fff;
+        letter-spacing: 0.2em;
+        color: #000;
+        border: 2px;
+      }
+
+      .inputBox1 input:valid~span,
+      .inputBox1 input:focus~span {
+        transform: translateX(156px) translateY(-15px);
+        font-size: 0.8em;
+        padding: 5px 10px;
+        background: #fff;
+        letter-spacing: 0.2em;
+        color: #fff;
+        border: 2px;
+      }
+
+      .inputBox input:valid,
+      .inputBox input:focus,
+      .inputBox1 input:valid,
+      .inputBox1 input:focus {
+        border: 2px solid #fff;
+        border-radius: 8px;
+      }
+
+      .enter {
+        height: 45px;
+        width: 100px;
+        border-radius: 5px;
+        border: 2px solid #fff;
+        cursor: pointer;
+        background-color: transparent;
+        transition: 0.5s;
+        text-transform: uppercase;
+        font-size: 10px;
+        letter-spacing: 2px;
+        margin-bottom: 3em;
+        color: #fff;
+      }
+
+      .enter:hover {
+        background-color: rgb(0, 0, 0);
+        color: #fff;
+      }
+}
+
+
+
+
+.error__icon {
+  width: 20px;
+  height: 20px;
+  transform: translateY(-2px);
+  margin-right: 8px;
+}
+
+.error__icon path {
+  fill: #fff;
 }

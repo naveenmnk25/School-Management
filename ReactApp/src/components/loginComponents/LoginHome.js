@@ -34,7 +34,7 @@ const LoginHomePage = () => {
                  </span>
             </div> 
           </div>
-          <div className="col-6 render-css">
+          <div className="col-8 render-css">
             <Outlet />
           </div>
          </div>

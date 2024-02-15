@@ -1,11 +1,11 @@
-import React, { useState, useEffect  } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 import { login } from "../../slices/auth";
-import { clearMessage } from "../../slices/message";
+import { clearMessage, setMessage } from "../../slices/message";
 
 const Login = () => {
   let navigate = useNavigate();
@@ -43,66 +43,86 @@ const Login = () => {
       })
       .catch(() => {
         setLoading(false);
+        setTimeout(() => {
+          dispatch(setMessage(message));
+        }, 4000);
       });
   };
 
   if (isLoggedIn) {
     return <Navigate to="/home" />;
   }
-
   return (
     <div className="col-md-12 login-form">
-      <div className="card card-container">
-        <img
-          src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-          alt="profile-img"
-          className="profile-img-card"
-        />
-        <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={handleLogin}
-        >
-          <Form>
-            <div className="form-group">
-              <label htmlFor="username">Username</label>
-              <Field name="username" type="text" className="form-control" />
-              <ErrorMessage
-                name="username"
-                component="div"
-                className="alert alert-danger"
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <Field name="password" type="password" className="form-control" />
-              <ErrorMessage
-                name="password"
-                component="div"
-                className="alert alert-danger"
-              />
-            </div>
-
-            <div className="form-group">
-              <button type="submit" className="btn btn-primary btn-block" disabled={loading}>
-                {loading && (
-                  <span className="spinner-border spinner-border-sm"></span>
-                )}
-                <span>Login</span>
-              </button>
-            </div>
-          </Form>
-        </Formik>
-      </div>
-
-      {message && (
-        <div className="form-group">
-          <div className="alert alert-danger" role="alert">
-            {message}
+      <div className="row">
+        <div className="col">
+          <div class="container">
+            <Formik
+              initialValues={initialValues}
+              validationSchema={validationSchema}
+              onSubmit={handleLogin}
+            >
+              <Form>
+                <div className="card">
+                  <div className="row">
+                    <div className="col-6">
+                      <div className="inputBox">
+                        <Field
+                          type="text"
+                          name="username"
+                          placeholder="Username"
+                        />
+                        <span>Username</span>
+                        {/* <ErrorMessage
+                          name="username"
+                          component="p"
+                          className="alert alert-danger"
+                        /> */}
+                      </div>
+                    </div>
+                    <div className="col-6">
+                      <div className="inputBox">
+                        <Field
+                          type="password"
+                          name="password"
+                          placeholder="Password"
+                        />
+                        <span>Password</span>
+                        {/* <ErrorMessage
+                          name="password"
+                          component="p"
+                          className="alert alert-danger"
+                        /> */}
+                      </div>
+                    </div>
+                    <div className="col-12 d-flex justify-content-center mt-3">
+                      <button
+                        type="submit"
+                        className="enter"
+                        disabled={loading}
+                      >
+                        {loading && (
+                          <span className="spinner-border spinner-border-sm"></span>
+                        )}
+                        <span> Login</span>
+                      </button>
+                    </div>
+                    <div className="col-12 d-flex justify-content-center mt-1">
+                      {message && (
+                        <div className="form-group">
+                          <div className="alert alert-danger" role="alert">
+                            {message} !
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </Form>
+            </Formik>
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 };

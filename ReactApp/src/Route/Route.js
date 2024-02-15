@@ -8,12 +8,14 @@ import RegistrationPage from '../components/loginComponents/Registration';
 import AdmissionPage from '../components/loginComponents/Admission';
 import LoginHomePage from '../components/loginComponents/LoginHome';
 import Login from '../components/loginComponents/Login';
+import LoginDemo from '../components/basicComponent/Login';
 
 const Routers = ({  }) => {
    return (
         <Routes>
             <Route path="/" element={<LoginHomePage />} />
             <Route path={PathConstants.HOME} element={<Home />} />
+              <Route path={PathConstants.LOGIN} element={<LoginDemo />} />
             <Route path={PathConstants.REGISTER} element={<Register />} />
             <Route path={PathConstants.USER} element={<BoardUser />} />
              <Route path={PathConstants.SMLOGINHOME} element={<LoginHomePage />} >

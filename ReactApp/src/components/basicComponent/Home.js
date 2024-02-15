@@ -1,28 +1,35 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
-import UserService from "../../services/user.service";
+import { useDispatch, useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
+import { logout } from "../../slices/auth";
+import eventBus from "../../common/EventBus";
+import { PathConstants } from "../../Route/path-constants";
 
 const Home = () => {
-  const [content, setContent] = useState("Hello");
+  const [showModeratorBoard, setShowModeratorBoard] = useState(false);
+  const [showAdminBoard, setShowAdminBoard] = useState(false);
 
-  useEffect(() => {
-    // UserService.getPublicContent().then(
-    //   (response) => {
-    //     setContent(response.data);
-    //   },
-    //   (error) => {
-    //     const _content =
-    //       (error.response && error.response.data) ||
-    //       error.message ||
-    //       error.toString();
+  const { user: currentUser } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+ 
+ 
+  const logOut = useCallback(() => {
+    dispatch(logout());
+  }, [dispatch]);
 
-    //     setContent(_content);
-    //   }
-    // );
-  }, []);
+  if (!currentUser) {
+    return <Navigate to={PathConstants.SMLOGIN} />;
+  }
 
   return (
    <>
+   <div>
+    <h1>Welcome {currentUser.username} !!!!!</h1>
+   </div>
+   <a href={PathConstants.SMLOGIN} className="nav-link" onClick={logOut}>
+                  LogOut
+                </a>
    </>
   );
 };
