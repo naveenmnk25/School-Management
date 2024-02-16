@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { PathConstants } from './path-constants';
-import Home from '../components/basicComponent/Home';
 import Register from '../components/basicComponent/Register';
 import BoardUser from '../components/basicComponent/BoardUser';
 import RegistrationPage from '../components/loginComponents/Registration';
@@ -9,6 +8,7 @@ import AdmissionPage from '../components/loginComponents/Admission';
 import LoginHomePage from '../components/loginComponents/LoginHome';
 import Login from '../components/loginComponents/Login';
 import LoginDemo from '../components/basicComponent/Login';
+import Home from '../components/Layout/Home';
 
 const Routers = ({  }) => {
    return (
